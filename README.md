@@ -1,0 +1,2 @@
+# learningOps
+script for autmatisation
