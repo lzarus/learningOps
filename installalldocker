@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Chech root permission
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
+echo
+
+# Docker installation
+if [ -x "$(command -v docker)" ]; then
+    echo "Docker is already installed."
+else
+    echo "Installing Docker..."
+    INSTALL_DOCKER_SCRIPT=https://github.com/lzarus/learningOps/blob/master/install_docker_ubuntu.sh
+    sh -c "$(curl -fsSL ${INSTALL_DOCKER_SCRIPT})" 1>/dev/null
+    echo "Docker installed!"
+    docker --version
+fi
+echo
+
+# Docker Compose installation
+if [ -x "$(command -v docker-compose)" ]; then
+    echo "Docker Compose is already installed."
+else
+    echo "Installing Docker Compose..."
+    INSTALL_DOCKER_COMPOSE_SCRIPT=https://github.com/lzarus/learningOps/blob/master/install_docker_compose.sh
+    sh -c "$(curl -fsSL ${INSTALL_DOCKER_COMPOSE_SCRIPT})" 1>/dev/null
+    echo "Docker Compose installed!"
+    docker-compose --version
+fi
+echo
